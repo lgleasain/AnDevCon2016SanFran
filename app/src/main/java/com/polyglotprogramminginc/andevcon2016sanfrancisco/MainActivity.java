@@ -32,7 +32,8 @@ import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        BleScannerFragment.ScannerCommunicationBus, ServiceConnection {
+        BleScannerFragment.ScannerCommunicationBus, ServiceConnection,
+        MWDeviceConfirmationFragment.DeviceConfirmCallback{
 
     // scan for devices
     private MetaWearBleService.LocalBinder mwBinder = null;
@@ -203,6 +204,7 @@ public class MainActivity extends AppCompatActivity
             );
             if (btDeviceSelected) {
                 MWDeviceConfirmationFragment mwDeviceConfirmFragment = new MWDeviceConfirmationFragment();
+                mwDeviceConfirmFragment.flashDeviceLight(mwBoard, getFragmentManager());
                 btDeviceSelected = false;
             }
 
@@ -230,4 +232,15 @@ public class MainActivity extends AppCompatActivity
         mwBoard.connect();
     }
 
+    /**
+     * Device confirmation callbacks and helper methods
+     */
+
+    public void pairDevice() {
+    }
+
+    public void dontPairDevice() {
+        mwBoard.disconnect();
+        mwScannerFragment.show(getFragmentManager(), "metawear_scanner_fragment");
+    }
 }
