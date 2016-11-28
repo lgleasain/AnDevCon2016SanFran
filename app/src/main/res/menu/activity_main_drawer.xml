@@ -10,6 +10,9 @@
             android:id="@+id/nav_thermistor"
             android:icon="@drawable/temperature"
             android:title="Thermistor" />
+        <item
+            android:id="@+id/nav_accelerometer"
+            android:title="Accelerometer" />
     </group>
 
 </menu>

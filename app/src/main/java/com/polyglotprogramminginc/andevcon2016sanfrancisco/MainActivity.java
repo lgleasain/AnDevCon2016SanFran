@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity
 
     // thermistor fragment
     private ThermistorFragment thermistorFragment;
+    private AccelerometerFragment accelerometerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,7 +149,13 @@ public class MainActivity extends AppCompatActivity
             thermistorFragment.setMetaWearBoard(mwBoard);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.main_content, thermistorFragment).commit();
+        } else if(id == R.id.nav_accelerometer){
+            accelerometerFragment = new AccelerometerFragment();
+            accelerometerFragment.setMetaWearBoard(mwBoard);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.main_content, accelerometerFragment).commit();
         }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
