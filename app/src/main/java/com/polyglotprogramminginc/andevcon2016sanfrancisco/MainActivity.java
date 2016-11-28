@@ -33,7 +33,7 @@ import java.util.UUID;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         BleScannerFragment.ScannerCommunicationBus, ServiceConnection,
-        MWDeviceConfirmationFragment.DeviceConfirmCallback{
+        MWDeviceConfirmationFragment.DeviceConfirmCallback {
 
     // scan for devices
     private MetaWearBleService.LocalBinder mwBinder = null;
@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity
     // connect to device
     private boolean btDeviceSelected;
     private MetaWearBoard mwBoard;
+
+    // thermistor fragment
+    private ThermistorFragment thermistorFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +143,11 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_main) {
             // Handle the camera action
+        } else if (id == R.id.nav_thermistor) {
+            thermistorFragment = new ThermistorFragment();
+            thermistorFragment.setMetaWearBoard(mwBoard);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.main_content, thermistorFragment).commit();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

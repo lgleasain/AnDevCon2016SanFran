@@ -1,0 +1,57 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.polyglotprogramminginc.andevcon2016sanfrancisco.ThermistorFragment">
+
+    <TableLayout
+        android:id="@+id/TableLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:paddingTop="20dp"
+            android:text="@string/temperature_text"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="normal|bold" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/temperature" />
+
+        <TextView
+            android:id="@+id/temperature_reading"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            android:textAlignment="center" />
+
+
+        <TextView />
+
+        <TableRow
+            android:id="@+id/tableRow9"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/startStopTemperature"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/start_temperature_stream" />
+        </TableRow>
+    </TableLayout>
+
+
+</FrameLayout>
