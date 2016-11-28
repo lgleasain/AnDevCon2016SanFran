@@ -19,11 +19,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.mbientlab.bletoolbox.scanner.BleScannerFragment;
 import com.mbientlab.metawear.MetaWearBleService;
+import com.mbientlab.metawear.MetaWearBoard;
 
 import java.util.UUID;
 
@@ -37,6 +40,9 @@ public class MainActivity extends AppCompatActivity
     private BluetoothAdapter btAdapter;
     private final static int REQUEST_ENABLE_BT = 0;
     //
+    // connect to device
+    private boolean btDeviceSelected;
+    private MetaWearBoard mwBoard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,6 +176,58 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onDeviceSelected(BluetoothDevice bluetoothDevice) {
-
+        // connect to device
+        btDeviceSelected = true;
+        connectDevice(bluetoothDevice);
+        Fragment metawearBlescannerPopup = getFragmentManager().findFragmentById(R.id.metawear_blescanner_popup_fragment);
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.remove(metawearBlescannerPopup);
+        fragmentTransaction.commit();
+        mwScannerFragment.dismiss();
     }
+
+    /**
+     * connection handlers
+     */
+    private MetaWearBoard.ConnectionStateHandler connectionStateHandler = new MetaWearBoard.ConnectionStateHandler() {
+        @Override
+        public void connected() {
+            Log.i("Metawear Controller", "Device Connected");
+            runOnUiThread(new Runnable() {
+                              @Override
+                              public void run() {
+                                  Toast.makeText(getApplicationContext(), "MetaWear Connected",
+                                          Toast.LENGTH_SHORT).show();
+                              }
+                          }
+            );
+            if (btDeviceSelected) {
+                MWDeviceConfirmationFragment mwDeviceConfirmFragment = new MWDeviceConfirmationFragment();
+                btDeviceSelected = false;
+            }
+
+        }
+
+        @Override
+        public void disconnected() {
+            Log.i("Metawear Controler", "Device Disconnected");
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getApplicationContext(), "MetaWear Disconnected", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        }
+    };
+
+    // MetaWear Connection Helper methods
+    private void connectDevice(BluetoothDevice device) {
+        mwBoard = mwBinder.getMetaWearBoard(device);
+
+        mwBoard.setConnectionStateHandler(connectionStateHandler);
+
+        mwBoard.connect();
+    }
+
 }
