@@ -2,12 +2,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.polyglotprogramminginc.andevcon2016sanfrancisco.AccelerometerFragment">
 
     <TableLayout
         android:id="@+id/TableLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:paddingTop="20dp"
+            android:text="@string/motion_text"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="normal|bold" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_directions_run"
+            android:layout_margin="10dp" />
 
         <TableRow
             android:id="@+id/tableRow1"
@@ -15,17 +31,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="2"
+            android:layout_margin="20dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:text="@string/x_text" />
+                android:text="@string/x_text"
+                android:textStyle="normal|bold"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/x_reading"
                 android:layout_width="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textStyle="normal|bold"
+                android:textSize="18sp" />
 
         </TableRow>
 
@@ -35,17 +56,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="2"
+            android:layout_margin="20dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:text="@string/y_text" />
+                android:text="@string/y_text"
+                android:textStyle="normal|bold"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/y_reading"
                 android:layout_width="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textStyle="normal|bold"
+                android:textSize="18sp" />
 
 
         </TableRow>
@@ -56,17 +82,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="2"
+            android:layout_margin="20dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:text="@string/z_text" />
+                android:text="@string/z_text"
+                android:textStyle="normal|bold"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/z_reading"
                 android:layout_width="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textStyle="normal|bold"
+                android:textSize="18sp" />
         </TableRow>
 
 
